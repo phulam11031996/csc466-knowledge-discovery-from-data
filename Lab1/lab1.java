@@ -1,8 +1,11 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class lab1 {
 
     public static void main(String[] args) {
-        DocumentCollection docs = new DocumentCollection("documents.txt");
+        DocumentCollection docs = new DocumentCollection("./files/documents.txt");
 
         String word = "";
         int fre = 0;
@@ -21,6 +24,12 @@ public class lab1 {
         System.out.println(fre);
         System.out.println(distictWord);
         System.out.println(totalWordCount);
+
+        try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(new File("./files/docvector")))) {
+            os.writeObject(docs);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
     }
 }

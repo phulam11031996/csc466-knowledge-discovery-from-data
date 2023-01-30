@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class TextVector {
-
+public class TextVector implements Serializable {
+   
     // data
     private HashMap<String, Integer> rawVector = new HashMap<String, Integer>();
 
