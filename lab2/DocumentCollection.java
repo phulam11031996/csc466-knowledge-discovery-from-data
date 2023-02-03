@@ -89,7 +89,7 @@ public class DocumentCollection implements Serializable {
     }
 
     public void normalize(DocumentCollection dc) {
-        dc.getDocuments()
+        this.getDocuments()
                 .stream()
                 .forEach(textVector -> textVector.normalize(dc));
     }

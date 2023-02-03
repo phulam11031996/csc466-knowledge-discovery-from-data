@@ -8,7 +8,7 @@ public class lab2 {
         CosineDistance cosineDistance = new CosineDistance();
 
         documents.normalize(documents);
-        queries.normalize(queries);
+        queries.normalize(documents);
 
         queries.getEntrySet().stream().forEach(entry -> {
             TextVector textVectorQuery = entry.getValue();

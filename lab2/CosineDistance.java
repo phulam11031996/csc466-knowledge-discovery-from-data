@@ -7,6 +7,7 @@ public class CosineDistance implements DocumentDistance {
     public double findDistance(TextVector query, TextVector document, DocumentCollection documents) {
         ArrayList<Double> arrQ = new ArrayList<>();
         ArrayList<Double> arrD = new ArrayList<>();
+
         query.getNormalizedVectorEntrySet().stream().forEach(entry -> {
             String word = entry.getKey();
             if (document.rawVector.containsKey(word)) {
@@ -15,8 +16,8 @@ public class CosineDistance implements DocumentDistance {
             }
         });
 
-        Double documentMag = document.getL2Norm();
-        Double queryMag = query.getL2Norm();
+        double queryMag = query.getL2Norm();
+        double documentMag = document.getL2Norm();
         Double dotProduct = IntStream.range(0, arrD.size())
                 .mapToDouble(i -> arrQ.get(i) * arrD.get(i))
                 .sum();
