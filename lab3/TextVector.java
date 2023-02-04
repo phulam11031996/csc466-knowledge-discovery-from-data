@@ -16,8 +16,6 @@ public abstract class TextVector implements Serializable {
 
     public abstract double getNormalizedFrequency(String word);
 
-    public abstract HashMap<String, Double> getNormalizedVector();
-
     // public
     public ArrayList<Integer> findClosestDocuments(DocumentCollection documents, DocumentDistance distanceAlg) {
         HashMap<Double, Integer> docSimilarity = new HashMap<>();
@@ -70,10 +68,7 @@ public abstract class TextVector implements Serializable {
     }
 
     public int getRawFrequency(String word) {
-        if (this.rawVector.containsKey(word)) {
-            return this.rawVector.get(word);
-        }
-        return 0;
+        return this.rawVector.get(word);
     }
 
     public int getHighestRawFrequency() {

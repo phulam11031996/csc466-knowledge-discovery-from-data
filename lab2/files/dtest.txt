@@ -1,0 +1,33 @@
+
+.I 1
+.T
+experimental investigation of the aerodynamics of a
+wing in a slipstream .
+.A
+brenckman,m.
+.B
+j. ae. scs. 25, 1958, 324.
+.W
+a a b a c a
+.I 2
+.T
+simple shear flow past a flat plate in an incompressible fluid of small
+viscosity .
+.A
+ting-yili
+.B
+department of aeronautical engineering, rensselaer polytechnic
+institute
+troy, n.y.
+.W
+a a b a c a
+.I 3
+.T
+the boundary layer in simple shear flow past a flat plate .
+.A
+m. b. glauert
+.B
+department of mathematics, university of manchester, manchester,
+england
+.W
+a c c

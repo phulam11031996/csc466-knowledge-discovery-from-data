@@ -1,9 +1,12 @@
 import java.util.Map.Entry;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class QueryVector extends TextVector {
     private HashMap<String, Double> normalizedVector = new HashMap<String, Double>();
+    private Object docCollection;
 
     @Override
     public void normalize(DocumentCollection dc) {
@@ -14,10 +17,7 @@ public class QueryVector extends TextVector {
         this.rawVector.entrySet().stream().forEach(textVector -> {
             String word = textVector.getKey();
             double fi = textVector.getValue();
-            long dfi = dc.getDocuments()
-                    .stream()
-                    .filter(tv -> tv.contains(word))
-                    .count();
+            double dfi = dc.getDocumentFrequency(word);
 
             double tf_idf = (dfi != 0)
                     ? ((0.5 + 0.5 * fi / max) * (Math.log(m / dfi) / Math.log(2)))
@@ -44,4 +44,6 @@ public class QueryVector extends TextVector {
     public HashMap<String, Double> getNormalizedVector() {
         return this.normalizedVector;
     }
+
+
 }

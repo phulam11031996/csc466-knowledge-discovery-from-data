@@ -14,7 +14,10 @@ public class DocumentVector extends TextVector {
         this.rawVector.entrySet().stream().forEach(textVector -> {
             String word = textVector.getKey();
             double fi = textVector.getValue();
-            double dfi = dc.getDocumentFrequency(word);
+            long dfi = dc.getDocuments()
+                    .stream()
+                    .filter(tv -> tv.contains(word))
+                    .count();
 
             double tf_idf = (dfi != 0)
                     ? (fi / max) * (Math.log(m / dfi) / Math.log(2))
@@ -26,9 +29,6 @@ public class DocumentVector extends TextVector {
 
     @Override
     public double getNormalizedFrequency(String word) {
-        if (!this.normalizedVector.containsKey(word)) {
-            return 0;
-        }
         return this.normalizedVector.get(word);
     }
 
@@ -36,9 +36,4 @@ public class DocumentVector extends TextVector {
     public Set<Entry<String, Double>> getNormalizedVectorEntrySet() {
         return this.normalizedVector.entrySet();
     }
-
-    public HashMap<String, Double> getNormalizedVector() {
-        return normalizedVector;
-    }
-
 }

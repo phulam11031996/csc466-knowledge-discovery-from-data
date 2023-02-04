@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -90,7 +89,7 @@ public class DocumentCollection implements Serializable {
     }
 
     public void normalize(DocumentCollection dc) {
-        this.getDocuments()
+        dc.getDocuments()
                 .stream()
                 .forEach(textVector -> textVector.normalize(dc));
     }
@@ -116,22 +115,11 @@ public class DocumentCollection implements Serializable {
         return this.docCollection.size();
     }
 
-    public double getDocumentFrequency(String word) {
-        return this.docCollection.values()
-                .stream()
-                .filter(textVector -> textVector.contains(word))
-                .count();
-    }
-
     public Collection<TextVector> getDocuments() {
         return this.docCollection.values();
     }
 
     public Set<Map.Entry<Integer, TextVector>> getEntrySet() {
         return this.docCollection.entrySet();
-    }
-
-    public HashMap<Integer, TextVector> getDocCollection() {
-        return docCollection;
     }
 }
