@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 import java.util.stream.IntStream;
 
 public class CosineDistance implements DocumentDistance {
@@ -14,13 +15,11 @@ public class CosineDistance implements DocumentDistance {
                 arrQ.add(query.getNormalizedFrequency(word));
             }
         });
-
-        Double documentMag = document.getL2Norm();
-        Double queryMag = query.getL2Norm();
+        double queryMag = query.getL2Norm();
+        double documentMag = document.getL2Norm();
         Double dotProduct = IntStream.range(0, arrD.size())
                 .mapToDouble(i -> arrQ.get(i) * arrD.get(i))
                 .sum();
-
         return dotProduct / (queryMag * documentMag);
     }
 }

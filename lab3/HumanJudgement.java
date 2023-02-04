@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class HumanJudgement {
-
     private ArrayList<String> lines = new ArrayList<>();
     private HashMap<Integer, ArrayList<Integer>> humanJudgement = new HashMap<Integer, ArrayList<Integer>>();
 
@@ -38,7 +37,7 @@ public class HumanJudgement {
             }
         }
     }
-    
+
     public HashMap<Integer, ArrayList<Integer>> getHumanJudgement() {
         return humanJudgement;
     }

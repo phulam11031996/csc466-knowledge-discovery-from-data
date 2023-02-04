@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class DocumentCollection implements Serializable {
-
     // private
     private String[] noiseWordArr = { "a", "about", "above", "all", "along",
             "also", "although", "am", "an", "and", "any", "are", "aren't", "as", "at",
@@ -89,7 +88,7 @@ public class DocumentCollection implements Serializable {
     }
 
     public void normalize(DocumentCollection dc) {
-        dc.getDocuments()
+        this.getDocuments()
                 .stream()
                 .forEach(textVector -> textVector.normalize(dc));
     }
@@ -115,11 +114,22 @@ public class DocumentCollection implements Serializable {
         return this.docCollection.size();
     }
 
+    public double getDocumentFrequency(String word) {
+        return this.docCollection.values()
+                .stream()
+                .filter(textVector -> textVector.contains(word))
+                .count();
+    }
+
     public Collection<TextVector> getDocuments() {
         return this.docCollection.values();
     }
 
     public Set<Map.Entry<Integer, TextVector>> getEntrySet() {
         return this.docCollection.entrySet();
+    }
+
+    public HashMap<Integer, TextVector> getDocCollection() {
+        return docCollection;
     }
 }
