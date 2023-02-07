@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="387db376-6ef7-4ed4-8d2c-1de04e8a681b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Lab1/DocumentCollection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab1/TextVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab1/lab1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lab2.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lab2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/.idea/lab2.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/CosineDistance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/DocumentCollection.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/DocumentDistance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/DocumentVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/QueryVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/TextVector.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/VectorType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/files/documents.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/files/docvector" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/files/queries.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/lab2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lab2/lab2.iml" beforeDir="false" />
-    </list>
+    <list default="true" id="387db376-6ef7-4ed4-8d2c-1de04e8a681b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,14 +19,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/phu/Desktop/CSC 466/lab2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/phu/Desktop/CSC 466/lab2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="lab2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lab2" />
@@ -98,7 +68,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/TextVector.java</url>
-          <line>105</line>
+          <line>98</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
