@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class lab2 {
+public class lab3 {
     public static DocumentCollection documents = new DocumentCollection("./files/documents.txt", VectorType.DOCUMENT);
     public static DocumentCollection queries = new DocumentCollection("./files/queries.txt", VectorType.QUERY);
 

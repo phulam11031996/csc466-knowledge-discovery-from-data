@@ -46,6 +46,11 @@ public class PageRank {
 
                 this.pageRankNew.put(node, rank);
             }
+            double total = getTotal();
+            for (int node : this.nodes) {
+                this.pageRankNew.put(node, this.pageRankNew.get(node) / total);
+            }
+
             L1Norm = findDistance();
             for (int node : this.nodes) {
                 this.pageRankOld.put(node, this.pageRankNew.get(node));
@@ -59,6 +64,14 @@ public class PageRank {
             distance += Math.abs(this.pageRankOld.get(node) - this.pageRankNew.get(node));
         }
         return distance;
+    }
+
+    public double getTotal(){
+        double sum = 0.0;
+        for (int node : this.nodes) {
+            sum += this.pageRankNew.get(node);
+        }
+        return sum;
     }
 
     public void addEdge(int node1, int node2) {
