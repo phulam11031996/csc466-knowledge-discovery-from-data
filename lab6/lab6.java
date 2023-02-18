@@ -8,10 +8,12 @@ import java.util.Scanner;
 
 class lab6 {
 
-    public static List<ItemSet> transactions = new ArrayList<>();
+    public static List<List<Integer>> transactions = new ArrayList<>();
     public static HashSet<Integer> items = new HashSet<>();
-    public static HashMap<Integer, ArrayList<ItemSet>> frequentItemSet = new HashMap<>();
+    public static HashMap<Integer, List<List<Integer>>> frequentItemSet = new HashMap<>();
+    public static ArrayList<Rule> rules;
     public static final double minSup = 0.01;
+    public static final double minConfi = 0.99;
 
     // processes the input file
     public static void process(String fileName) {
@@ -21,13 +23,11 @@ class lab6 {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] arrData = data.split(", ");
-
-                ItemSet itemSet = new ItemSet();
+                List<Integer> itemSet = new ArrayList<>();
                 for (int i = 0; i < arrData.length; i++) {
                     if (i != 0) {
-                        int num = Integer.parseInt(arrData[i]);
-                        items.add(num);
-                        itemSet.addItem(num);
+                        items.add(Integer.parseInt(arrData[i]));
+                        itemSet.add(Integer.parseInt(arrData[i]));
                     }
                 }
                 transactions.add(itemSet);
@@ -39,51 +39,37 @@ class lab6 {
         }
     }
 
-    public static boolean canCombine(ItemSet itemSet1, ItemSet itemSet2) {
-        List<Integer> items1 = itemSet1.getItemSet();
-        List<Integer> items2 = itemSet2.getItemSet();
-        boolean flag = true;
-        for (int i = 0; i < items1.size() - 1; i++) {
-            if (items1.get(i) != items2.get(i)) {
-                flag = false;
-            }
-        }
-        return flag;
-    }
-
     // finds all k-itemsets, Returns false if no itemsets were found (precondition
     // k>=2)
     public static void findFrequentItemSets(int k) {
-        ArrayList<List<Integer>> candItemSets = new ArrayList<>();
-        ArrayList<ItemSet> freqItemSets = new ArrayList<>();
-        ArrayList<ItemSet> preF = frequentItemSet.get(k - 1);
-
+        List<List<Integer>> candItemSets = new ArrayList<>();
+        List<List<Integer>> freqItemSets = new ArrayList<>();
+        List<List<Integer>> preF = frequentItemSet.get(k - 1);
         for (int i = 0; i < preF.size(); i++) {
             for (int j = i + 1; j < preF.size(); j++) {
-                ItemSet itemSeti = preF.get(i);
-                ItemSet itemSetj = preF.get(j);
+                List<Integer> itemSeti = preF.get(i);
+                List<Integer> itemSetj = preF.get(j);
                 if (canCombine(itemSeti, itemSetj)) {
                     List<Integer> tmp = new ArrayList<>();
-                    tmp.addAll(itemSeti.getItemSet());
-                    tmp.add(itemSetj.getItemSet().get(k - 2));
+                    tmp.addAll(itemSeti);
+                    tmp.add(itemSetj.get(k - 2));
                     candItemSets.add(tmp);
                 }
             }
         }
-
         for (List<Integer> itemList : candItemSets) {
-            if (isFrequent(new ItemSet(itemList))) {
-                freqItemSets.add(new ItemSet(itemList));
+            if (isFrequent(itemList)) {
+                freqItemSets.add(itemList);
             }
         }
         frequentItemSet.put(k, freqItemSets);
     }
 
     // tells if the itemset is frequent, i.e., meets the minimum support
-    public static boolean isFrequent(ItemSet itemSet) {
+    public static boolean isFrequent(List<Integer> itemSet) {
         int supportCount = 0;
-        for (ItemSet transaction : transactions) {
-            if (transaction.getItemSet().containsAll(itemSet.getItemSet())) {
+        for (List<Integer> transaction : transactions) {
+            if (transaction.containsAll(itemSet)) {
                 supportCount++;
             }
         }
@@ -93,19 +79,77 @@ class lab6 {
 
     // finds all 1-itemsets
     public static void findFrequentSingleItemSets() {
-        ArrayList<ItemSet> result = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
         for (int i : items) {
             double support = transactions.stream()
-                    .filter(itemSet -> itemSet.getItemSet().contains(i))
+                    .filter(itemSet -> itemSet.contains(i))
                     .count() / items.size();
-
             if (minSup <= support) {
-                ItemSet itemSet = new ItemSet();
-                itemSet.addItem(i);
+                List<Integer> itemSet = new ArrayList<>();
+                itemSet.add(i);
                 result.add(itemSet);
             }
         }
         frequentItemSet.put(1, result);
+    }
+
+    public static void generateRules() {
+        for (List<List<Integer>> listItemSets : frequentItemSet.values())
+            for (List<Integer> itemSets : listItemSets)
+                for (Rule rule : splitIntoTwo(itemSets))
+                    if (isMinConfidenceMet(rule))
+                        System.out.println(rule);
+    }
+
+    public static boolean isMinConfidenceMet(Rule r) {
+        double leftCount = 0;
+        double rightCount = 0;
+        for (List<Integer> transaction : transactions) {
+            if (transaction.containsAll(r.getLeft())) {
+                leftCount += 1;
+                if (transaction.containsAll(r.getRight())) {
+                    rightCount += 1;
+                }
+            }
+        }
+        return (rightCount / leftCount) >= minConfi;
+    }
+
+    public static List<Rule> splitIntoTwo(List<Integer> inputList) {
+        List<Rule> allCombinations = new ArrayList<>();
+        int n = inputList.size();
+        for (int i = 1; i < (1 << n); i++) {
+            List<Integer> firstPartIndexes = new ArrayList<>();
+            for (int j = 0; j < n; j++) {
+                if ((i & (1 << j)) > 0) {
+                    firstPartIndexes.add(j);
+                }
+            }
+            List<Integer> firstPart = new ArrayList<>();
+            List<Integer> secondPart = new ArrayList<>();
+            for (int k = 0; k < n; k++) {
+                if (firstPartIndexes.contains(k)) {
+                    firstPart.add(inputList.get(k));
+                } else {
+                    secondPart.add(inputList.get(k));
+                }
+            }
+            Rule combination = new Rule(firstPart, secondPart);
+            if (firstPart.size() != 0 && secondPart.size() != 0) {
+                allCombinations.add(combination);
+            }
+        }
+        return allCombinations;
+    }
+
+    public static boolean canCombine(List<Integer> itemSet1, List<Integer> itemSet2) {
+        boolean flag = true;
+        for (int i = 0; i < itemSet1.size() - 1; i++) {
+            if (itemSet1.get(i) != itemSet2.get(i)) {
+                flag = false;
+            }
+        }
+        return flag;
     }
 
     public static void main(String args[]) {
@@ -115,7 +159,8 @@ class lab6 {
         findFrequentItemSets(3);
         findFrequentItemSets(4);
         findFrequentItemSets(5);
-        findFrequentItemSets(6);
-        System.out.println(frequentItemSet);
+
+        generateRules();
+
     }
 }

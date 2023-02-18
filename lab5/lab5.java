@@ -11,7 +11,7 @@ class lab5 {
     public static List<ItemSet> transactions = new ArrayList<>();
     public static HashSet<Integer> items = new HashSet<>();
     public static HashMap<Integer, ArrayList<ItemSet>> frequentItemSet = new HashMap<>();
-    public static final double minSup = 0.01;
+    public static final double minSup = 2/6;
 
     // processes the input file
     public static void process(String fileName) {
@@ -116,9 +116,8 @@ class lab5 {
         findFrequentItemSets(2);
         findFrequentItemSets(3);
         findFrequentItemSets(4);
-        findFrequentItemSets(5);
-        findFrequentItemSets(6);
-        System.out.println(frequentItemSet);
+        
+        System.out.println(frequentItemSet.get(3));
 
     }
 }
