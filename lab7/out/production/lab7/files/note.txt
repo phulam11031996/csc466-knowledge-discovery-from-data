@@ -1,0 +1,5 @@
+4 = All
+5 = Some
+9 = Poor
+6 = Good
+7 = Average

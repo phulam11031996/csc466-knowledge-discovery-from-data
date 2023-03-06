@@ -1,12 +1,11 @@
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Reviews {
 
-    private List<Review> reviews = new ArrayList<>();
+    private final List<Review> reviews;
 
     @JsonCreator
     private Reviews(@JsonProperty("reviews") List<Review> reviews) {

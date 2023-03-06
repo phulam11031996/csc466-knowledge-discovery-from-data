@@ -3,23 +3,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Matrix {
-    private ArrayList<ArrayList<Integer>> matrix = new ArrayList<ArrayList<Integer>>();
+    private int[][] matrix;
 
-    public Matrix() {
-
-    }
-
-    // Examines only the specified rows of the array. It returns the number of rows
-    // in which the element at position attribute (a number between 0 and 4) is
-    // equal to value.
-    private int findFrequency(int attribute, int value, ArrayList<Integer> rows) {
-        int freq = 0;
-        for (int i : rows) {
-            if (this.matrix.get(i).get(attribute) == value) {
-                freq++;
-            }
-        }
-        return freq;
+    public Matrix(int[][] data) {
+        this.matrix = data;
     }
 
     // Examines only the specified rows of the array. It returns a HashSet of the
@@ -27,7 +14,7 @@ public class Matrix {
     private HashSet<Integer> findDifferentValues(int attribute, ArrayList<Integer> rows) {
         HashSet<Integer> res = new HashSet<>();
         for (int i : rows) {
-            res.add(this.matrix.get(i).get(attribute));
+            res.add(this.matrix[i][attribute]);
         }
         return res;
     }
@@ -37,7 +24,7 @@ public class Matrix {
     private ArrayList<Integer> findRows(int attribute, int value, ArrayList<Integer> rows) {
         ArrayList<Integer> res = new ArrayList<>();
         for (int i : rows) {
-            if (this.matrix.get(i).get(attribute) == value) {
+            if (this.matrix[i][attribute] == value) {
                 res.add(i);
             }
         }
@@ -54,7 +41,7 @@ public class Matrix {
         double entropy = 0.0;
         HashMap<Integer, Integer> classCounts = new HashMap<>();
         for (int i : rows) {
-            int classValue = this.matrix.get(i).get(this.matrix.get(i).size() - 1);
+            int classValue = this.matrix[i][this.matrix[i].length - 1];
             classCounts.put(classValue, classCounts.getOrDefault(classValue, 0) + 1);
         }
 
@@ -76,7 +63,6 @@ public class Matrix {
             double p = (double) partitionedRows.size() / rows.size();
             entropy += p * findEntropy(partitionedRows);
         }
-
         return entropy;
     }
 
@@ -106,31 +92,37 @@ public class Matrix {
         }
     }
 
+    // tested
     // returns the most common category for the dataset that is the defined by the
     // specified rows.
     public int findMostCommonValue(ArrayList<Integer> rows) {
-        HashMap<Integer, Integer> valueCounts = new HashMap<Integer, Integer>();
-        for (int i : rows) {
-            int classValue = this.matrix.get(i).get(this.matrix.get(i).size() - 1);
-            if (valueCounts.containsKey(classValue)) {
-                int count = valueCounts.get(classValue);
-                valueCounts.put(classValue, count + 1);
+        HashMap<Integer, Integer> categoryFreq = new HashMap<>();
+        int maxFreqCategory = -1;
+        int maxFreq = 0;
+    
+        // Loop through the specified rows
+        for (int i = 0; i < rows.size(); i++) {
+            int[] row = matrix[rows.get(i)];
+            int category = row[row.length - 1];
+    
+            // Update the frequency of the category in the HashMap
+            if (categoryFreq.containsKey(category)) {
+                int freq = categoryFreq.get(category) + 1;
+                categoryFreq.put(category, freq);
+                if (freq > maxFreq) {
+                    maxFreq = freq;
+                    maxFreqCategory = category;
+                }
             } else {
-                valueCounts.put(classValue, 1);
+                categoryFreq.put(category, 1);
+                if (1 > maxFreq) {
+                    maxFreq = 1;
+                    maxFreqCategory = category;
+                }
             }
         }
-
-        int mostCommonValue = 0;
-        int maxCount = 0;
-        for (int value : valueCounts.keySet()) {
-            int count = valueCounts.get(value);
-            if (count > maxCount) {
-                mostCommonValue = value;
-                maxCount = count;
-            }
-        }
-
-        return mostCommonValue;
+    
+        return maxFreqCategory;
     }
 
     // Splits the dataset that is defined by rows on the attribute. Each element of
@@ -138,9 +130,8 @@ public class Matrix {
     // ArrayList of rows that have this value.
     public HashMap<Integer, ArrayList<Integer>> split(int attribute, ArrayList<Integer> rows) {
         HashMap<Integer, ArrayList<Integer>> partitions = new HashMap<Integer, ArrayList<Integer>>();
-
         for (int i : rows) {
-            int value = this.matrix.get(i).get(attribute);
+            int value = this.matrix[i][attribute];
             if (!partitions.containsKey(value)) {
                 partitions.put(value, new ArrayList<Integer>());
             }

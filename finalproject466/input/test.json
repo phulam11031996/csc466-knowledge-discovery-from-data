@@ -1,0 +1,16 @@
+{
+	"reviews" : [
+		{"review_id":"","user_id":"alex","business_id":"avengers","stars":4.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"alex","business_id":"starwars","stars":2.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"alex","business_id":"spiderman","stars":5.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"alex","business_id":"ironman","stars":4.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"bob","business_id":"avengers","stars":5.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"bob","business_id":"starwars","stars":3.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"bob","business_id":"thor","stars":4.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"bob","business_id":"ironman","stars":3.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"tom","business_id":"avengers","stars":3.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"tom","business_id":"thor","stars":4.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"tom","business_id":"spiderman","stars":4.0,"useful":0,"funny":0,"cool":0,"text":"","date":""},
+		{"review_id":"","user_id":"tom","business_id":"ironman","stars":3.0,"useful":0,"funny":0,"cool":0,"text":"","date":""}
+	]
+}
