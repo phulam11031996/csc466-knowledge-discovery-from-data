@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Matrix {
-    private int[][] matrix;
+    private final int[][] matrix;
 
     public Matrix(int[][] data) {
         this.matrix = data;
@@ -37,7 +37,7 @@ public class Matrix {
     }
 
     // finds the entropy of the dataset that consists of the specified rows.
-    private double findEntropy(ArrayList<Integer> rows) {
+    double findEntropy(ArrayList<Integer> rows) {
         double entropy = 0.0;
         HashMap<Integer, Integer> classCounts = new HashMap<>();
         for (int i : rows) {
@@ -69,7 +69,7 @@ public class Matrix {
     // finds the information gain of partitioning on the attribute. Considers only
     // the specified rows.
     private double findGain(int attribute, ArrayList<Integer> rows) {
-        return findEntropy(rows) - findEntropy(attribute, rows);
+        return Math.abs(findEntropy(rows) - findEntropy(attribute, rows));
     }
 
     // returns the Information Gain Ratio, where we only look at the data defined by
@@ -99,12 +99,12 @@ public class Matrix {
         HashMap<Integer, Integer> categoryFreq = new HashMap<>();
         int maxFreqCategory = -1;
         int maxFreq = 0;
-    
+
         // Loop through the specified rows
         for (int i = 0; i < rows.size(); i++) {
             int[] row = matrix[rows.get(i)];
             int category = row[row.length - 1];
-    
+
             // Update the frequency of the category in the HashMap
             if (categoryFreq.containsKey(category)) {
                 int freq = categoryFreq.get(category) + 1;
@@ -121,7 +121,7 @@ public class Matrix {
                 }
             }
         }
-    
+
         return maxFreqCategory;
     }
 
